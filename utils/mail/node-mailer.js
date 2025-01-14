@@ -26,7 +26,8 @@ const nodeMailer = (data) => {
           viewPath: path.resolve("./public/emailTemplates/"),
         };
         transporter.use("compile", hbs(handlebarOptions));
-        logger.info("Handlebars template engine configured.");
+        // logger.info("Handlebars template engine configured.");
+        console.log("Handlebars template engine configured.");
       } else if (templateEngine === "ejs") {
         // EJS setup
         transporter.use("compile", (mail, callback) => {
@@ -39,7 +40,8 @@ const nodeMailer = (data) => {
             data.context,
             (err, renderedHtml) => {
               if (err) {
-                logger.error(`Error rendering EJS template: ${err.message}`);
+                // logger.error(`Error rendering EJS template: ${err.message}`);
+                console.error(`Error rendering EJS template: ${err.message}`);
                 return callback(err);
               }
               mail.data.html = renderedHtml;
@@ -47,7 +49,8 @@ const nodeMailer = (data) => {
             }
           );
         });
-        logger.info("EJS template engine configured.");
+        // logger.info("EJS template engine configured.");
+        console.log("EJS template engine configured.");
       } else {
         throw new Error(`Unsupported template engine: ${templateEngine}`);
       }
@@ -65,14 +68,17 @@ const nodeMailer = (data) => {
       // Send the email
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-          logger.error(`Failed to send email: ${error.message}`);
+          // logger.error(`Failed to send email: ${error.message}`);
+          console.error(`Failed to send email: ${error.message}`);
           return reject(error);
         }
-        logger.info(`Message sent: ${info.response}`);
+        // logger.info(`Message sent: ${info.response}`);
+        console.log(`Message sent: ${info.response}`);
         resolve(`Mail sent to ${data.reciever} successfully`);
       });
     } catch (err) {
-      logger.error(`Mailer setup failed: ${err.message}`);
+      // logger.error(`Mailer setup failed: ${err.message}`);
+      console.error(`Mailer setup failed: ${err.message}`);
       reject(err);
     }
   });

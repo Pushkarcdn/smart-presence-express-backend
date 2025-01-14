@@ -171,7 +171,10 @@ app.use((err, req, res, next) => {
       );
     } else {
       // Generic error logging
-      logger.error(
+      // logger.error(
+      //   `[${req.method}] ${req.path} >> StatusCode : ${status}, Message : ${message} "\n" Stack : ${err.stack}`
+      // );
+      console.error(
         `[${req.method}] ${req.path} >> StatusCode : ${status}, Message : ${message} "\n" Stack : ${err.stack}`
       );
       errorObj = errorResponse(

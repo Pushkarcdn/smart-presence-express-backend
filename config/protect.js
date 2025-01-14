@@ -36,10 +36,10 @@ const unprotectedRoutes = [
     route: "/api/signout",
   },
 
-  // faqs
+  // admins
   {
     methods: ["GET"],
-    route: "/api/faqs",
+    route: "/api/admins",
   },
 
   // testimonials
@@ -166,7 +166,12 @@ const isUserAllowed = (route, method, role) => {
     Temporarily allow all routes for everyone (for development purpose only)
     Specify api access acc to roles and remove this before going to prodution
   */
-  if (role) return true;
+
+  console.log(
+    "Temporarily allowing all routes for everyone (for development purpose only)"
+  );
+
+  if (role || !role) return true;
 
   let currentRoutes = [];
 
