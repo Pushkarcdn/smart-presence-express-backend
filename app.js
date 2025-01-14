@@ -67,7 +67,7 @@ db.sequelize
   .authenticate()
   .then(() => {
     // Optionally force-sync DB schema for development
-    db.sequelize.sync({ force: true, logging: false });
+    db.sequelize.sync({ alter: true, logging: false });
     logger.info("DB connected");
   })
   .catch((err) => logger.error(err.stack));

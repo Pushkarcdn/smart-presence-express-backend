@@ -8,16 +8,10 @@ module.exports = {
    * Database Dialect Configuration
    * Chooses between supported databases (PostgreSQL, MySQL, etc.)
    */
-  // dialect: process.env.DIALECT || { postgres: "postgres", mysql: "mysql" }, // Default dialects for both Postgres and MySQL
 
   dialect: {
     postgres: "postgres",
     mysql: "mysql",
-  },
-
-  // Frontend
-  frontend: {
-    url: process.env.FRONTEND_URL,
   },
 
   /**
@@ -46,32 +40,6 @@ module.exports = {
 
   // Email addresses for recieving emails
   emails: {},
-
-  /**
-   * MongoDB Configuration
-   * Used when MongoDB is chosen.
-   */
-  mongo: {
-    uri:
-      process.env.MONGO ||
-      "mongodb://" +
-        (process.env.IP || "localhost") +
-        ":" +
-        (process.env.MONGO_PORT || "27017") +
-        "/hulaki", // MongoDB URI with default values
-  },
-
-  /**
-   * MySQL Database Configuration
-   * Used when MySQL is the chosen database.
-   */
-  mysql: {
-    host: process.env.MYSQL, // MySQL Host
-    user: process.env.MYSQL_USER, // MySQL User
-    password: process.env.MYSQL_PASSWORD, // MySQL Password
-    port: process.env.MYSQL_PORT, // MySQL Port
-    database: process.env.MYSQL_DATABASE,
-  },
 
   /**
    * OAuth Configuration for Google and Facebook
@@ -103,32 +71,13 @@ module.exports = {
     password: process.env.POSTGRES_PASSWORD, // PostgreSQL Password
     port: process.env.POSTGRES_PORT, // PostgreSQL Port
     database: process.env.POSTGRES_DATABASE, // PostgreSQL Database Name
-  },
-
-  /**
-   * RabbitMQ Configuration
-   * Configuration for RabbitMQ connection and queue name.
-   */
-  rabbitMq: {
-    host: `amqp://${process.env.RABBITMQ_HOST}`, // RabbitMQ host (defaults to localhost)
-    queue: process.env.QUEUE, // Queue name (defaults to testqueue)
-  },
-
-  /**
-   * Redis Configuration
-   * Configuration for Redis client connection.
-   */
-  redisConfig: {
-    host: process.env.REDIS_HOST, // Default Redis host
-    port: process.env.REDIS_PORT, // Default Redis port
-    password: process.env.REDIS_PASSWORD || null, // Default to no password if not set
-    db: process.env.REDIS_DB,
+    ca: process.env.CA,
   },
 
   /**
    * Session Configuration
    */
   sessionConfig: {
-    secret: process.env.SESSION_SECRET || "secret", // Default secret key for sessions
+    secret: process.env.SESSION_SECRET, // Default secret key for sessions
   },
 };
