@@ -10,10 +10,11 @@ module.exports = function (app) {
   // Iterate over each route file found
   routers.forEach((route) => {
     // Log the route in development mode
-    if (process.env.NODE_ENV !== "production") {
-      // logger.info(`Loading route: ${route}`);
-      console.log(`Loading route: ${route}`);
-    }
+    console.log(`Loading route: ${route}`);
+
+    // if (process.env.NODE_ENV !== "production") {
+    //   logger.info(`Loading route: ${route}`);
+    // }
 
     // Create a new router instance for each route file
     const router = express.Router();

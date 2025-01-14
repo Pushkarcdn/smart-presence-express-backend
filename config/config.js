@@ -71,7 +71,6 @@ module.exports = {
     password: process.env.POSTGRES_PASSWORD, // PostgreSQL Password
     port: process.env.POSTGRES_PORT, // PostgreSQL Port
     database: process.env.POSTGRES_DATABASE, // PostgreSQL Database Name
-    ca: process.env.CA,
   },
 
   /**
