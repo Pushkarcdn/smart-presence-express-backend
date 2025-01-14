@@ -2,11 +2,11 @@ const {
   getPaginationParams,
   formatPaginatedResponse,
 } = require("./helpers/pagination");
-const { logger, write } = require("./logging/logger");
+// const { logger, write } = require("./logging/logger");
 
 module.exports = {
-  write: write,
-  logger: logger,
+  // write: write,
+  // logger: logger,
   getPaginationParams: getPaginationParams,
   formatPaginatedResponse: formatPaginatedResponse,
   isEmpty: require("./validation/is-empty"),

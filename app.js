@@ -68,9 +68,13 @@ db.sequelize
   .then(() => {
     // Optionally force-sync DB schema for development
     db.sequelize.sync({ alter: true, logging: false });
-    logger.info("DB connected");
+    // logger.info("DB connected");
+    console.log("DB connected");
   })
-  .catch((err) => logger.error(err.stack));
+  .catch((err) => {
+    // logger.error(err.stack);
+    console.error(err.stack);
+  });
 
 /**
  * Optional: MongoDB connection initialization

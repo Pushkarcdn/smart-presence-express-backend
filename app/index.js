@@ -1,6 +1,6 @@
 const glob = require("glob"); // Import glob for file pattern matching
-const { logger } = require("../utils"); // Import logger utility for logging
 const express = require("express"); // Import express framework
+// const { logger } = require("../utils"); // Import logger utility for logging
 
 // Function to initialize routes
 module.exports = function (app) {
@@ -11,7 +11,8 @@ module.exports = function (app) {
   routers.forEach((route) => {
     // Log the route in development mode
     if (process.env.NODE_ENV !== "production") {
-      logger.info(`Loading route: ${route}`);
+      // logger.info(`Loading route: ${route}`);
+      console.log(`Loading route: ${route}`);
     }
 
     // Create a new router instance for each route file
@@ -26,10 +27,12 @@ module.exports = function (app) {
       app.use("/api", router);
     } catch (error) {
       // Log an error if route loading fails
-      logger.error(`Failed to load route ${route}: ${error.message}`);
+      // logger.error(`Failed to load route ${route}: ${error.message}`);
+      console.error(`Failed to load route ${route}: ${error.message}`);
     }
   });
 
   // Optional: Log the total number of routes loaded
-  logger.info(`Total routes loaded: ${routers.length}`);
+  // logger.info(`Total routes loaded: ${routers.length}`);
+  console.log(`Total routes loaded: ${routers.length}`);
 };

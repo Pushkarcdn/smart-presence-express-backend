@@ -4,18 +4,16 @@ const SignOutController = require("./signout.controller.js");
 const validator = require("../../middlewares/joi.middleware");
 
 const { addAdminValidation } = require("../admins/admin.validation.js");
-const upload = require("../../lib/multer");
+// const upload = require("../../lib/multer");
 
 module.exports = (router) => {
   // admin
 
-  router
-    .route("/register/admin")
-    .post(
-      upload.single("profileImage"),
-      validator(addAdminValidation),
-      RegisterController.registerAdmin
-    );
+  router.route("/register/admin").post(
+    // upload.single("profileImage"),
+    validator(addAdminValidation),
+    RegisterController.registerAdmin
+  );
 
   router.route("/signin/admin").post(SignInController.signinAdmin);
 
