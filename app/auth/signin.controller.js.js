@@ -5,7 +5,7 @@ const { signAccessToken } = require("../../lib/jwt");
 const { saveAccessToken } = require("../accessTokens/accessToken.service");
 const { verifyHashedPassword } = require("../../lib/bcrypt.js");
 
-const { getAdminByEmail, updateAdmin } = require("../admins/admin.service.js");
+const { getUserByEmail, updateUser } = require("../users/user.service.js");
 
 const currentUser = async (req, res, next) => {
   try {
@@ -19,14 +19,14 @@ const currentUser = async (req, res, next) => {
   }
 };
 
-const signinAdmin = async (req, res, next) => {
+const signInUser = async (req, res, next) => {
   try {
     const { email } = req.body;
-    const admin = await getAdminByEmail(email);
+    const user = await getUserByEmail(email);
 
-    if (!admin) throw new AuthException("invalidCredential", "");
+    if (!user) throw new AuthException("invalidCredential", "");
 
-    processLogin(req, res, next, admin);
+    processLogin(req, res, next, user);
   } catch (error) {
     next(error);
   }
@@ -38,35 +38,35 @@ const processLogin = async (req, res, next, user) => {
     const { password } = req.body;
     const hashedPassword = user.password;
 
-    if (!hashedPassword && user?.oAuthId) {
-      const oauthProvider = user?.oAuthProvider;
-      throw new HttpException(
-        403,
-        "Please sign in with " +
-          oauthProvider +
-          " as you have signed up with " +
-          oauthProvider,
-        "OAuth"
-      );
-    }
+    // if (!hashedPassword && user?.oAuthId) {
+    //   const oauthProvider = user?.oAuthProvider;
+    //   throw new HttpException(
+    //     403,
+    //     "Please sign in with " +
+    //       oauthProvider +
+    //       " as you have signed up with " +
+    //       oauthProvider,
+    //     "OAuth"
+    //   );
+    // }
 
     const isMatch = await verifyHashedPassword(password, hashedPassword);
 
     if (!isMatch) throw new AuthException("invalidCredential", "");
 
     const accessToken = await signAccessToken({
-      id: user.dataValues.id,
-      email: user.dataValues.email,
+      id: user.id,
+      email: user.email,
       role,
     });
 
     let tokenPayload = {
       accessToken,
-      email: user?.dataValues?.email,
+      userId: user?.id,
       ip: req?.ip,
     };
 
-    await updateAdmin(user.dataValues.id, { lastLogin: new Date() });
+    await updateUser(user.id, { lastLogin: new Date() });
 
     await saveAccessToken(tokenPayload);
 
@@ -84,5 +84,5 @@ const processLogin = async (req, res, next, user) => {
 
 module.exports = {
   currentUser,
-  signinAdmin,
+  signInUser,
 };

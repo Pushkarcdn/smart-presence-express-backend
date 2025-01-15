@@ -1,19 +1,12 @@
 const db = require("../../lib/sequelize");
-const { access_tokens } = db;
+const { accessTokens } = db;
 
 const saveAccessToken = async (payload) => {
-  return await access_tokens.create(payload);
+  return await accessTokens.create(payload);
 };
 
-/**
- * Get details of a access token.
- * @param {string} access_token - The email of the AccessToken config.
- * @returns {object} - The AccessToken details if found.
- * @throws {HttpException} - Throws error if the access token is not found.
- */
-
 const getAccessToken = async (accessToken) => {
-  return await access_tokens.findOne({
+  return await accessTokens.findOne({
     where: {
       accessToken: accessToken,
     },
@@ -21,7 +14,7 @@ const getAccessToken = async (accessToken) => {
 };
 
 const getAccessTokensByUserId = async (userId) => {
-  return await access_tokens.find({
+  return await accessTokens.find({
     where: {
       userId,
     },
@@ -29,7 +22,7 @@ const getAccessTokensByUserId = async (userId) => {
 };
 
 const invalidateAccessToken = async (accessToken) => {
-  return await access_tokens.update(
+  return await accessTokens.update(
     {
       isActive: false,
     },

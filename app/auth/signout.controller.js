@@ -11,7 +11,8 @@ const signOutUser = async (req, res, next) => {
       sameSite: "none",
     });
 
-    await invalidateAccessToken(req.cookies.access_token);
+    if (req.cookies.access_token)
+      await invalidateAccessToken(req.cookies.access_token);
 
     return successResponse(
       res,

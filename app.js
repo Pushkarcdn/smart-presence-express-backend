@@ -14,7 +14,7 @@ const passport = require("passport");
 const httpContext = require("express-http-context");
 const { authMiddleware } = require("./middlewares/auth.middleware");
 const { HttpException, AuthException } = require("./exceptions/index");
-const { sessionConfig } = require("./config/config");
+// const { sessionConfig } = require("./config/config");
 
 /**
  * Initialize Passport Strategies
@@ -32,7 +32,7 @@ const app = new express();
  * Initialize in-memory session store
  * This could be replaced by a more scalable option (like Redis) in production.
  */
-const memoryStore = new session.MemoryStore();
+// const memoryStore = new session.MemoryStore();
 
 /**
  * Middleware for Different Environments
@@ -110,14 +110,14 @@ app.use(authMiddleware); // Uncomment to enable global authentication middleware
  * Session Management
  * Memory store should be replaced with Redis or other persistent stores in production.
  */
-app.use(
-  session({
-    secret: sessionConfig.secret, // Secret for signing session IDs
-    resave: false, // Do not save session if it hasn't been modified
-    saveUninitialized: true, // Save session even if uninitialized
-    store: memoryStore, // Store sessions in memory (for development)
-  })
-);
+// app.use(
+//   session({
+//     secret: sessionConfig.secret, // Secret for signing session IDs
+//     resave: false, // Do not save session if it hasn't been modified
+//     saveUninitialized: true, // Save session even if uninitialized
+//     store: memoryStore, // Store sessions in memory (for development)
+//   })
+// );
 
 /**
  * Initialize Application Routes

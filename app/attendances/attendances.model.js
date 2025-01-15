@@ -1,8 +1,8 @@
 const CommonEntity = require("../common/common.entity");
 
 module.exports = (sequelize, DataTypes) => {
-  const AccessTokens = sequelize.define(
-    "accessTokens",
+  const Attendances = sequelize.define(
+    "attendances",
     {
       ...CommonEntity,
 
@@ -13,20 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       userId: {
         type: DataTypes.UUID,
-        allowNull: true,
+        allowNull: false,
         references: {
           model: "users",
           key: "id",
         },
-        onDelete: "CASCADE",
-      },
-      accessToken: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      ip: {
-        type: DataTypes.TEXT,
-        allowNull: false,
       },
     },
     {
@@ -34,5 +25,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  return AccessTokens;
+  return Attendances;
 };

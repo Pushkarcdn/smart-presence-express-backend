@@ -12,22 +12,18 @@ const unprotectedRoutes = [
     route: "/",
   },
 
-  // manual register / signup
+  // manual register (Temporarily allowed for everyone)
 
   {
     methods: ["POST"],
-    route: "/api/register/admin",
+    route: "/api/register",
   },
 
   // manual signin
 
   {
     methods: ["POST"],
-    route: "/api/signin/employer",
-  },
-  {
-    methods: ["POST"],
-    route: "/api/signin/admin",
+    route: "/api/signin",
   },
 
   // signout
@@ -36,22 +32,10 @@ const unprotectedRoutes = [
     route: "/api/signout",
   },
 
-  // admins
+  // users
   {
     methods: ["GET"],
-    route: "/api/admins",
-  },
-
-  // testimonials
-  {
-    methods: ["GET"],
-    route: "/api/testimonials",
-  },
-
-  // inquiry
-  {
-    methods: ["POST"],
-    route: "/api/inquiries",
+    route: "/api/users",
   },
 ];
 

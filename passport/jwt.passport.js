@@ -2,7 +2,7 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const config = require("../config/config");
 const { getAccessToken } = require("../app/accessTokens/accessToken.service");
-const { getAdminByID } = require("../app/admins/admin.service");
+const { getAdminByID } = require("../app/users/user.service");
 const { isUserAllowed } = require("../config/protect");
 
 let extractedToken = null;

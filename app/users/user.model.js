@@ -2,8 +2,8 @@ const { hashPassword } = require("../../lib/bcrypt");
 const CommonEntity = require("../common/common.entity");
 
 module.exports = (sequelize, DataTypes) => {
-  const Admins = sequelize.define(
-    "admins",
+  const Users = sequelize.define(
+    "users",
     {
       ...CommonEntity,
 
@@ -30,30 +30,29 @@ module.exports = (sequelize, DataTypes) => {
       },
       phone: {
         type: DataTypes.STRING(16),
-        allowNull: true,
+        allowNull: false,
+        unique: {
+          args: true,
+          msg: "User with this phone number already exists",
+        },
+      },
+      address: {
+        type: DataTypes.STRING(128),
+        allowNull: false,
       },
       password: {
         type: DataTypes.STRING(256),
-        allowNull: false,
+        allowNull: true,
       },
       lastLogin: {
         type: DataTypes.DATE,
         allowNull: true,
       },
-      profileImage: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      },
-      address: {
-        type: DataTypes.STRING(128),
-        allowNull: true,
-      },
       role: {
         type: DataTypes.ENUM({
-          values: ["admin", "superAdmin"],
+          values: ["admin", "superAdmin", "teacher", "student"],
         }),
-        allowNull: true,
-        defaultValue: "admin",
+        allowNull: false,
       },
     },
     {
@@ -62,17 +61,17 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   // Lifecycle hooks for password hashing
-  Admins.beforeCreate(async (admin) => {
-    if (admin.password) {
-      admin.password = await hashPassword(admin.password);
+  Users.beforeCreate(async (user) => {
+    if (user.password) {
+      user.password = await hashPassword(user.password);
     }
   });
 
-  Admins.beforeUpdate(async (admin) => {
-    if (admin.changed("password")) {
-      admin.password = await hashPassword(admin.password);
+  Users.beforeUpdate(async (user) => {
+    if (user.changed("password")) {
+      user.password = await hashPassword(user.password);
     }
   });
 
-  return Admins;
+  return Users;
 };
