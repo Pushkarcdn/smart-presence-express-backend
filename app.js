@@ -4,7 +4,6 @@ const cookieParser = require("cookie-parser");
 const compression = require("compression");
 const cors = require("cors");
 const hpp = require("hpp");
-const { logger } = require("./utils");
 const morgan = require("morgan");
 const session = require("express-session");
 const db = require("./lib/sequelize");

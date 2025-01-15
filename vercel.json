@@ -2,14 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "app/index.js",
+      "src": "server-v.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "app/index.js"
+      "dest": "/server-v.js"
     }
-  ]
+  ],
+  "env": {
+    "PORT": 3000,
+    "NODE_ENV": "production"
+  }
 }
