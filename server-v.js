@@ -1,8 +1,6 @@
 const app = require("./app");
 const http = require("http");
 
-require("dotenv").config({ path: `.env` });
-
 // Vercel expects an HTTP server to be used for Node.js deployments
 const server = http.createServer(app);
 
