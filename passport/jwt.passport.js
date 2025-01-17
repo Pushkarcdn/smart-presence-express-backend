@@ -2,7 +2,7 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const config = require("../config/config");
 const { getAccessToken } = require("../app/accessTokens/accessToken.service");
-const { getAdminByID } = require("../app/users/user.service");
+const { getUserByID } = require("../app/users/user.service");
 const { isUserAllowed } = require("../config/protect");
 
 let extractedToken = null;
@@ -40,7 +40,7 @@ module.exports = (passport) => {
 
           // Fetch user based on role
           // change admin to user
-          user = await getAdminByID(sub);
+          user = await getUserByID(sub);
 
           if (!user) return done(null, false);
 

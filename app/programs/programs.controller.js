@@ -11,9 +11,29 @@ const addProgram = async (req, res, next) => {
   }
 };
 
+const updateProgram = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const program = await ProgramsService.updateProgram(id, req.body);
+    return successResponse(res, program, "update", "Program");
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getAllPrograms = async (req, res, next) => {
   try {
     const programs = await ProgramsService.getAllPrograms();
+    return successResponse(res, programs, "fetch", "Program");
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getProgramById = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const programs = await ProgramsService.getProgramById(id);
     return successResponse(res, programs, "fetch", "Program");
   } catch (error) {
     next(error);
@@ -33,6 +53,8 @@ const deleteProgram = async (req, res, next) => {
 
 module.exports = {
   addProgram,
+  updateProgram,
+  getProgramById,
   getAllPrograms,
   deleteProgram,
 };
