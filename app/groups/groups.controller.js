@@ -20,6 +20,28 @@ const getAllGroups = async (req, res, next) => {
   }
 };
 
+const getGroupById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const group = await GrooupsService.getGroupById(id);
+    if (!group) throw new NotFoundException("notFound", "groups");
+    return successResponse(res, group, "fetch", "group");
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateGroup = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const group = await GrooupsService.updateGroup(id, req.body);
+    if (!group) throw new NotFoundException("notFound", "groups");
+    return successResponse(res, group, "update", "group");
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteGroup = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -34,5 +56,7 @@ const deleteGroup = async (req, res, next) => {
 module.exports = {
   addGroup,
   getAllGroups,
+  getGroupById,
+  updateGroup,
   deleteGroup,
 };

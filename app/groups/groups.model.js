@@ -29,5 +29,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  Groups.associate = (models) => {
+    Groups.belongsTo(models.programs, {
+      foreignKey: "programId",
+      as: "program",
+    });
+
+    // Groups.hasMany(models.users, {
+    //   foreignKey: "groupId",
+    //   as: "students",
+    // });
+  };
+
   return Groups;
 };
