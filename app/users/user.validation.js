@@ -1,12 +1,15 @@
 const Joi = require("joi");
 
 const addUserValidation = Joi.object({
+  id: Joi.string().allow("").optional(),
   firstName: Joi.string().min(3).max(32).required(),
   lastName: Joi.string().min(3).max(32).required(),
   email: Joi.string().email().required(),
   phone: Joi.string().required(),
   address: Joi.string().max(128).required(),
-  password: Joi.string().optional(),
+  password: Joi.string().allow("").optional(),
+  moduleId: Joi.string().allow("").optional(),
+  groupId: Joi.string().allow("").optional(),
   role: Joi.string().required(),
 }).meta({ name: "UserConfig" });
 

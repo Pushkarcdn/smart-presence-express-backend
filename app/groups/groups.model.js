@@ -29,9 +29,9 @@ module.exports = (sequelize, DataTypes) => {
       as: "program",
     });
 
-    // Groups.hasMany(models.classes, {
+    // Groups.hasMany(models.modules, {
     //   foreignKey: "groupId",
-    //   as: "classes",
+    //   as: "module",
     // });
   };
 

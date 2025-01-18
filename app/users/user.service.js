@@ -1,6 +1,7 @@
-const { users } = require("../../lib/sequelize");
+const { users, groups, programs, modules } = require("../../lib/sequelize");
 
 const addUser = async (payload) => {
+  console.log(payload);
   return await users.create(payload);
 };
 
@@ -11,6 +12,32 @@ const getAllUser = async () => {
 const getUsersByField = async (where) => {
   return await users.findAll({
     where,
+    include: [
+      {
+        model: groups,
+        as: "group",
+        attributes: ["name"],
+        include: [
+          {
+            model: programs,
+            as: "program",
+            attributes: ["name"],
+          },
+        ],
+      },
+      {
+        model: modules,
+        as: "module",
+        attributes: ["name"],
+        include: [
+          {
+            model: programs,
+            as: "program",
+            attributes: ["name"],
+          },
+        ],
+      },
+    ],
   });
 };
 

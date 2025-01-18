@@ -8,8 +8,8 @@ const registerUser = async (req, res, next) => {
     const existingUser = await getUserByEmail(req.body.email);
     if (existingUser) throw new HttpException(409, "duplicateData", "user");
 
-    const createdUser = await addUser(req.body);
-    return successResponse(res, createdUser, "create", "User");
+    await addUser(req.body);
+    return successResponse(res, "createdUser", "create", "User");
   } catch (error) {
     next(error);
   }

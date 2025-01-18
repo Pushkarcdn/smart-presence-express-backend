@@ -1,12 +1,15 @@
 const { successResponse } = require("../../utils");
 const { NotFoundException } = require("../../exceptions/index");
 const AttendancesService = require("./attendances.service");
+const UsersService = require("../users/user.service");
 
 const markPresence = async (req, res, next) => {
   try {
-    const { id } = req.body;
-    const attendance = await AttendancesService.markPresence(id);
-    return successResponse(res, attendance, "mark", "Attendance");
+    const { id } = req.params;
+    await AttendancesService.markPresence(id);
+    const user = await UsersService.getUserByID(id);
+    delete user.password;
+    return successResponse(res, user, "update", "Attendance");
   } catch (error) {
     next(error);
   }

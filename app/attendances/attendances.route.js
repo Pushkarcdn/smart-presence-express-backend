@@ -7,7 +7,7 @@ module.exports = (router) => {
     .route("/class-attendances/:id")
     .get(AttendanceController.getAttendanceByClass);
 
-  router.route("/record-presence/:id").post(AttendanceController.markPresence);
+  router.route("/record-presence/:id").get(AttendanceController.markPresence);
 
   router
     .route("/attendances/:id")
