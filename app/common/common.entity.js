@@ -15,10 +15,11 @@ const CommonEntity = {
     allowNull: false,
     defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
   },
-  deletedAt: {
-    type: DataTypes.DATE,
-    allowNull: true,
-  },
+  // uncomment if enabled soft delete
+  // deletedAt: {
+  //   type: DataTypes.DATE,
+  //   allowNull: true,
+  // },
   createdBy: {
     type: DataTypes.UUID,
     allowNull: true,

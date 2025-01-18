@@ -20,6 +20,28 @@ const getAllClasss = async (req, res, next) => {
   }
 };
 
+const getClassById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const item = await ClassesService.getClassById(id);
+    if (!item) throw new NotFoundException("notFound", "classes");
+    return successResponse(res, item, "fetch", "class");
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateClass = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const item = await ClassesService.updateClass(id, req.body);
+    if (!item) throw new NotFoundException("notFound", "classes");
+    return successResponse(res, item, "update", "class");
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteClass = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -34,5 +56,7 @@ const deleteClass = async (req, res, next) => {
 module.exports = {
   addClass,
   getAllClasss,
+  getClassById,
+  updateClass,
   deleteClass,
 };

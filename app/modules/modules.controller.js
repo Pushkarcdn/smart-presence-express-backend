@@ -22,7 +22,8 @@ const getAllModules = async (req, res, next) => {
 
 const getModuleById = async (req, res, next) => {
   try {
-    const module = await ModulesService.getModuleById();
+    const { id } = req.params;
+    const module = await ModulesService.getModuleById(id);
     return successResponse(res, module, "fetch", "modules");
   } catch (error) {
     next(error);

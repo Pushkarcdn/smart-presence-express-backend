@@ -16,8 +16,11 @@ const getAllModules = async () => {
   });
 };
 
-const getModuleById = async () => {
+const getModuleById = async (id) => {
   return await modules.findOne({
+    where: {
+      id,
+    },
     include: [
       {
         model: programs,

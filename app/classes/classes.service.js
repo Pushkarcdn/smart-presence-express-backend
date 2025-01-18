@@ -1,11 +1,86 @@
-const { classes } = require("../../lib/sequelize");
+const {
+  classes,
+  groups,
+  users,
+  modules,
+  programs,
+} = require("../../lib/sequelize");
 
 const addClass = async (payload) => {
   return await classes.create(payload);
 };
 
 const getAllClasses = async () => {
-  return await classes.findAll();
+  return await classes.findAll({
+    include: [
+      {
+        model: groups,
+        as: "group",
+        attributes: ["name"],
+      },
+      {
+        model: users,
+        as: "teacher",
+        attributes: ["firstName", "lastName", "email"],
+        include: [
+          {
+            model: modules,
+            as: "module",
+            attributes: ["name"],
+            include: [
+              {
+                model: programs,
+                as: "program",
+                attributes: ["name"],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+};
+
+const getClassById = async (id) => {
+  return await classes.findOne({
+    where: {
+      id,
+    },
+    include: [
+      {
+        model: groups,
+        as: "group",
+        attributes: ["name"],
+      },
+      {
+        model: users,
+        as: "teacher",
+        attributes: ["id", "firstName", "lastName", "email"],
+        include: [
+          {
+            model: modules,
+            as: "module",
+            attributes: ["id", "name"],
+            include: [
+              {
+                model: programs,
+                as: "program",
+                attributes: ["id", "name"],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+};
+
+const updateClass = async (id, payload) => {
+  return await classes.update(payload, {
+    where: {
+      id,
+    },
+  });
 };
 
 const deleteClass = async (id) => {
@@ -19,5 +94,7 @@ const deleteClass = async (id) => {
 module.exports = {
   addClass,
   getAllClasses,
+  getClassById,
+  updateClass,
   deleteClass,
 };
