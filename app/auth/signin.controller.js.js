@@ -1,16 +1,22 @@
 const { successResponse } = require("../../utils");
 
-const { AuthException, HttpException } = require("../../exceptions/index");
+const { AuthException } = require("../../exceptions/index");
 const { signAccessToken } = require("../../lib/jwt");
 const { saveAccessToken } = require("../accessTokens/accessToken.service");
 const { verifyHashedPassword } = require("../../lib/bcrypt.js");
 
-const { getUserByEmail, updateUser } = require("../users/user.service.js");
+const {
+  getUserByEmail,
+  getUserByID,
+  updateUser,
+} = require("../users/user.service.js");
 
 const currentUser = async (req, res, next) => {
   try {
     if (req?.user) {
-      return successResponse(res, req?.user, "fetch", "auth");
+      const user = await getUserByID(req?.user?.id);
+      delete user.password;
+      return successResponse(res, user, "fetch", "auth");
     } else {
       throw new AuthException("unauthorized", "");
     }
@@ -37,6 +43,8 @@ const processLogin = async (req, res, next, user) => {
     const role = user.role;
     const { password } = req.body;
     const hashedPassword = user.password;
+
+    console.log(user.email, user.role);
 
     // if (!hashedPassword && user?.oAuthId) {
     //   const oauthProvider = user?.oAuthProvider;

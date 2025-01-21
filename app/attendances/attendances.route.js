@@ -10,6 +10,10 @@ module.exports = (router) => {
   router.route("/record-presence/:id").get(AttendanceController.markPresence);
 
   router
+    .route("/day-attendances")
+    .post(AttendanceController.getAttendanceByDay);
+
+  router
     .route("/attendances/:id")
     .delete(AttendanceController.deleteAttendance);
 };

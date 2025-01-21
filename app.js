@@ -130,7 +130,12 @@ require("./app/")(app);
  */
 app.get("/", (req, res) => {
   console.log("Hello, backend is up");
-  res.status(200).json({ msg: "Hello, backend is up" });
+  res.status(200).json({
+    status: 200,
+    data: "Test api",
+    message: "Backend is up!",
+    source: "[GET] /",
+  });
 });
 
 /**

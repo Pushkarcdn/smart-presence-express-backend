@@ -54,6 +54,32 @@ const getUserByID = async (id) => {
     where: {
       id,
     },
+    include: [
+      {
+        model: groups,
+        as: "group",
+        attributes: ["id", "name"],
+        include: [
+          {
+            model: programs,
+            as: "program",
+            attributes: ["id", "name"],
+          },
+        ],
+      },
+      {
+        model: modules,
+        as: "module",
+        attributes: ["id", "name"],
+        include: [
+          {
+            model: programs,
+            as: "program",
+            attributes: ["id", "name"],
+          },
+        ],
+      },
+    ],
   });
 };
 

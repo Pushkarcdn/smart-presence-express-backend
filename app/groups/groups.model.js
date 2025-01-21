@@ -29,10 +29,10 @@ module.exports = (sequelize, DataTypes) => {
       as: "program",
     });
 
-    // Groups.hasMany(models.modules, {
-    //   foreignKey: "groupId",
-    //   as: "module",
-    // });
+    Groups.hasMany(models.users, {
+      foreignKey: "groupId",
+      as: "group",
+    });
   };
 
   return Groups;

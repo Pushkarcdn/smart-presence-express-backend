@@ -75,6 +75,45 @@ const getClassById = async (id) => {
   });
 };
 
+const getClassByField = async (where) => {
+  return await classes.findOne({
+    where,
+    include: [
+      {
+        model: groups,
+        as: "group",
+        attributes: ["name"],
+        include: [
+          {
+            model: users,
+            as: "group",
+            attributes: ["id", "firstName", "lastName", "email", "role"],
+          },
+        ],
+      },
+      {
+        model: users,
+        as: "teacher",
+        attributes: ["id", "firstName", "lastName", "email"],
+        include: [
+          {
+            model: modules,
+            as: "module",
+            attributes: ["id", "name"],
+            include: [
+              {
+                model: programs,
+                as: "program",
+                attributes: ["id", "name"],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+};
+
 const updateClass = async (id, payload) => {
   return await classes.update(payload, {
     where: {
@@ -95,6 +134,7 @@ module.exports = {
   addClass,
   getAllClasses,
   getClassById,
+  getClassByField,
   updateClass,
   deleteClass,
 };
