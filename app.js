@@ -5,7 +5,6 @@ const compression = require("compression");
 const cors = require("cors");
 const hpp = require("hpp");
 const morgan = require("morgan");
-const session = require("express-session");
 const db = require("./lib/sequelize");
 const { errorResponse } = require("./utils/");
 const path = require("path");
@@ -41,7 +40,7 @@ if (process.env.NODE_ENV === "development") {
   console.log("Development Environment");
   app.use(
     cors({
-      origin: true, // Allow all origins during development
+      origin: true, // Allow frontend from second laptop
       credentials: true,
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     })
@@ -51,7 +50,7 @@ if (process.env.NODE_ENV === "development") {
   console.log("Production Environment");
   app.use(
     cors({
-      origin: true, // Allow all origins
+      origin: true, // Allow frontend from second laptop
       credentials: true,
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     })

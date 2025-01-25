@@ -7,8 +7,13 @@ const signOutUser = async (req, res, next) => {
   try {
     res.clearCookie("access_token", {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      // for localhost only
+      // secure: true,
+      // sameSite: "none",
+      // for running on local devices using IP
+      secure: false,
+      sameSite: "lax",
+      // domain: "192.168.1.65", // Allow the cookie to be set for the backend's IP
     });
 
     if (req.cookies.access_token)
