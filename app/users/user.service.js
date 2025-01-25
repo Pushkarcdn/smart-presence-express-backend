@@ -1,7 +1,7 @@
 const { users, groups, programs, modules } = require("../../lib/sequelize");
 
 const addUser = async (payload) => {
-  console.log(payload);
+  // console.log(payload);
   return await users.create(payload);
 };
 

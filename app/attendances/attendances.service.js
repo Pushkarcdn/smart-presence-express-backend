@@ -16,6 +16,15 @@ const getAttendancesByField = async (where) => {
   });
 };
 
+const getLastAttendance = async (userId) => {
+  return await attendances.findOne({
+    where: {
+      userId,
+    },
+    order: [["createdAt", "DESC"]],
+  });
+};
+
 const deleteAttendance = async (id) => {
   return await attendances.destroy({
     where: {
@@ -27,6 +36,7 @@ const deleteAttendance = async (id) => {
 module.exports = {
   markPresence,
   getAllAttendances,
+  getLastAttendance,
   getAttendancesByField,
   deleteAttendance,
 };

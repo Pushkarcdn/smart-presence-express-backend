@@ -9,9 +9,29 @@ const ClassService = require("../classes/classes.service");
 const markPresence = async (req, res, next) => {
   try {
     const { id } = req.params;
-    await AttendancesService.markPresence(id);
+
     const user = await UsersService.getUserByID(id);
+    if (!user) throw new NotFoundException("User not found!", "User");
     delete user.password;
+
+    // first check if the user has already marked the attendance within 5 mins before
+    const lastAttendance = await AttendancesService.getLastAttendance(id);
+    if (lastAttendance) {
+      const currentTime = new Date();
+      const lastAttendanceTime = new Date(lastAttendance.createdAt);
+      const diff = currentTime - lastAttendanceTime;
+      if (diff < 5 * 60 * 1000) {
+        return successResponse(
+          res,
+          user,
+          "update",
+          "Attendance marked already!"
+        );
+      }
+    }
+
+    await AttendancesService.markPresence(id);
+
     return successResponse(res, user, "update", "Attendance");
   } catch (error) {
     next(error);

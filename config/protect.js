@@ -189,8 +189,8 @@ const isUserAllowed = (route, method, role) => {
   });
 
   if (!isMatch) {
-    console.log(route, method, role);
-    console.log("User is not authorized to access this resource.");
+    // console.log(route, method, role);
+    console.error("User is not authorized to access this resource.");
   }
   return isMatch;
 };

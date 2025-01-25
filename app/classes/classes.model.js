@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         model: "users",
         key: "id",
       },
+      onDelete: "CASCADE",
     },
     groupId: {
       type: DataTypes.UUID,
@@ -36,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
         model: "groups",
         key: "id",
       },
+      onDelete: "CASCADE",
     },
   });
 

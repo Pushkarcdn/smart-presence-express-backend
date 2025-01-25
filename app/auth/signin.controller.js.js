@@ -44,7 +44,7 @@ const processLogin = async (req, res, next, user) => {
     const { password } = req.body;
     const hashedPassword = user.password;
 
-    console.log(user.email, user.role);
+    // console.log(user.email, user.role);
 
     // if (!hashedPassword && user?.oAuthId) {
     //   const oauthProvider = user?.oAuthProvider;

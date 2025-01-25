@@ -62,6 +62,7 @@ module.exports = (sequelize, DataTypes) => {
         model: "groups",
         key: "id",
       },
+      onDelete: "CASCADE",
     },
 
     // for teachers
@@ -72,6 +73,7 @@ module.exports = (sequelize, DataTypes) => {
         model: "modules",
         key: "id",
       },
+      onDelete: "CASCADE",
     },
   });
 
