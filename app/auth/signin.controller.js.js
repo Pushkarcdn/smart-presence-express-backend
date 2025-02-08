@@ -80,12 +80,12 @@ const processLogin = async (req, res, next, user) => {
 
     res.cookie("access_token", accessToken, {
       httpOnly: true,
-      // for localhost only
-      // secure: true,
-      // sameSite: "none",
+      // for localhost & azure
+      secure: true,
+      sameSite: "none",
       // for running on local devices using IP
-      secure: false,
-      sameSite: "lax",
+      // secure: false,
+      // sameSite: "lax",
       // domain: "192.168.1.65", // Allow the cookie to be set for the backend's IP
     });
 
