@@ -36,27 +36,37 @@ const app = new express();
 /**
  * Middleware for Different Environments
  */
-if (process.env.NODE_ENV === "development") {
-  console.log("Development Environment");
-  app.use(
-    cors({
-      origin: true, // Allow frontend from second laptop
-      credentials: true,
-      methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    })
-  );
-  app.use(morgan("dev", { stream: stream })); // Dev logging format
-} else {
-  console.log("Production Environment");
-  app.use(
-    cors({
-      origin: true, // Allow frontend from second laptop
-      credentials: true,
-      methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    })
-  );
-  app.use(morgan("combined", { stream: stream })); // More detailed logging for production
-}
+// if (process.env.NODE_ENV === "development") {
+//   console.log("Development Environment");
+//   app.use(
+//     cors({
+//       origin: true, // Allow frontend from second laptop
+//       credentials: true,
+//       methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+//     })
+//   );
+//   app.use(morgan("dev", { stream: stream })); // Dev logging format
+// } else {
+//   console.log("Production Environment");
+//   app.use(
+//     cors({
+//       origin: true, // Allow frontend from second laptop
+//       credentials: true,
+//       methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+//     })
+//   );
+//   app.use(morgan("combined", { stream: stream })); // More detailed logging for production
+// }
+
+console.log("Production Environment");
+app.use(
+  cors({
+    origin: true, // Allow frontend from second laptop
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  })
+);
+app.use(morgan("combined", { stream: stream })); // More detailed logging for produc
 
 /**
  * Connect to the SQL Database using Sequelize
