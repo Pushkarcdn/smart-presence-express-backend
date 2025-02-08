@@ -84,8 +84,8 @@ const processLogin = async (req, res, next, user) => {
       // secure: true,
       // sameSite: "none",
       // for running on local devices using IP
-      secure: true,
-      sameSite: "lax",
+      secure: false,
+      sameSite: "none",
       // domain: "192.168.1.65", // Allow the cookie to be set for the backend's IP
     });
 
