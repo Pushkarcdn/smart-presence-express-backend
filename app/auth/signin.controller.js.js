@@ -80,13 +80,13 @@ const processLogin = async (req, res, next, user) => {
 
     res.cookie("access_token", accessToken, {
       httpOnly: true,
-      // for localhost & azure
+      // for localhost only
       // secure: true,
       // sameSite: "none",
       // for running on local devices using IP
       secure: false,
       sameSite: "none",
-      // domain: "192.168.1.65", // Allow the cookie to be set for the backend's IP
+      // domain: "192.168.1.2", // Allow the cookie to be set for the backend's IP
     });
 
     return successResponse(res, "Successfully Logged in", "loggedIn", role);
