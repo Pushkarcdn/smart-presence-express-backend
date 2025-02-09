@@ -11,8 +11,8 @@ const signOutUser = async (req, res, next) => {
       // secure: true,
       // sameSite: "none",
       // for running on local devices using IP
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       // domain: "192.168.1.65", // Allow the cookie to be set for the backend's IP
     });
 

@@ -80,8 +80,8 @@ const processLogin = async (req, res, next, user) => {
 
     res.cookie("access_token", accessToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
     });
 
     return successResponse(res, "Successfully Logged in", "loggedIn", role);
